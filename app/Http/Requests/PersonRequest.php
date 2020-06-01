@@ -24,7 +24,7 @@ class PersonRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
+            'name'  => 'required',
             'email' => 'email|required',
         ];
     }
