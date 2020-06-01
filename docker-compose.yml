@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  app:
+    container_name: viatechno-app
+    build:
+      dockerfile: Dockerfile
+      context: .
+    volumes:
+      - ./:/var/www
+    ports:
+      - 8080:8080
+    networks:
+      - viatechno-db-network
+  db:
+    image: mysql:8
+#    ports:
+#      - 3306:3306
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_ROOT_PASSWORD: laravel
+    volumes:
+      - viatechno-db:/var/lib/mysql
+    networks:
+      - viatechno-db-network
+
+networks:
+  viatechno-db-network:
+    driver: bridge
+
+volumes:
+  viatechno-db:
+    driver: local
